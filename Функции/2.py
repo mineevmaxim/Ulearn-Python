@@ -110,8 +110,7 @@ true_false = {
 }
 
 file_name = input()
-#file_name = 'vacancies_for_learn_demo.csv'
-# file_name = 'year_2020.csv'
+
 
 rows, titles = csv_reader(file_name)
 
