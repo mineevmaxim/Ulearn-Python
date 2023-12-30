@@ -9,4 +9,3 @@ with SimpleXMLRPCServer((host, port)) as server:
     server.register_function(get_sqrt_of_discriminant)
 
     server.serve_forever()
-    
