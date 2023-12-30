@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vacancies</title>
+</head>
+<body>
+<table style="border: 1px solid #333;">
+    <thead style="background-color: #333; color: #fff;">
+        <tr>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Area name</th>
+            <th>Published at</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in data %}
+            <tr id="answer">
+                <td style="border: 1px solid #333;">{{ e.name }}</td>
+                <td style="border: 1px solid #333;">{{ e.salary }}</td>
+                <td style="border: 1px solid #333;">{{ e.area_name }}</td>
+                <td style="border: 1px solid #333;">{{ e.published_at }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
