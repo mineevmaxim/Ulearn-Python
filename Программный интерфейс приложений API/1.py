@@ -15,4 +15,3 @@ while True:
 
     if str(json_res.get('area_name')).strip() == city:
         print(json_res)
-        
