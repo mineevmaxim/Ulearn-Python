@@ -12,21 +12,48 @@ fake_data = [
 
 @csrf_exempt
 def hello(request):
-    # TODO: получить имя пользователя из таблицы site_users по полученному id из POST запроса
+    if request.GET:
+        render(request, 'hello.html', {'name': 'пользователь'})
+
+    if request.POST:
+        id = request.POST.get('id')
+        name = (SiteUser.objects.get(id=id)).get_name()
+        return render(request, 'hello.html', {'name': name})
 
     return render(request, 'hello.html', {'name': 'Поменяй меня'})
 
 
 def all_vacancies(request):
-    # TODO: получить все данные о вакансиях из таблицы vacancies
+    data = Vacancy.objects.all()
 
-    return render(request, 'vacancies_table.html', {'data': fake_data})
+    return render(request, 'vacancies_table.html', {'data': data})
 
 
 def filter_vacancies(request):
     # TODO: получить данные о вакансиях из таблицы vacancies с учетом фильтров из GET запроса
 
-    return render(request, 'vacancies_table.html', {'data': fake_data})
+    name_start = request.GET.get('name_start', '')
+    salary = request.GET.get('salary', '')
+    city_start = request.GET.get('city_start', '')
+
+    data = Vacancy.objects.filter()
+
+    if name_start:
+        data = data.objects.filter(name=str(name_start))
+    if salary:
+        data = data.objects.filter(salary=str(salary))
+    if city_start:
+        data = data.objects.filter(area_name=str(city_start))
+
+    # if name_start or salary or city_start:
+    #     data = data.objects.filter(
+    #         name=name_start,
+    #         salary=salary,
+    #         area_name=city_start,
+    #     )
+    #     return render(request, 'hello.html', {'name': data})
+
+    return render(request, 'vacancies_table.html', {'data': data})
 
 
 def get_salary_year_dynamic(request):
