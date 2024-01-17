@@ -6,3 +6,5 @@ database_name = input()
 csv_file = input()
 table_name = input()
 currency_table = input()
+
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ans</title>
+</head>
+<body>
+<div id="answer">
+    <p>{{vacancy.name}}</p>
+    <p>Зарплата: {{vacancy.salary}}</p>
+    <p>Город: {{vacancy.area_name}}</p>
+    <p>Требуемые навыки:</p>
+    <p></p>
+    {% for skill in skills %}
+        <p>{{skill}}</p>
+    {%endfor%}
+    <p></p>
+    <p>Отклики:</p>
+    <ul>
+        {% for response in responses %}
+        <li>{{response.user.last_name}}: {{response.message}}</li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

@@ -70,10 +70,37 @@ def formatter(row: dict, dic_naming: dict, experience, currency, true_false):
     return result
 
 
-def print_vacancies(data_vacancies, dic_naming, experience, currency, true_false):
+def print_vacancies(data_vacancies, dic_naming, experience, currency, true_false, start_end, fields):
     if len(data_vacancies) == 0:
         print('Нет данных')
         return
+
+    start = 0
+    end = len(data_vacancies)
+    start_end = start_end.split()
+
+    if len(start_end) == 2:
+        start = int(start_end[0]) - 1
+        end = int(start_end[1]) - 1
+    if len(start_end) == 1:
+        start = int(start_end[0]) - 1
+
+    if len(fields):
+        fields = list(fields.split(', '))
+        fields.insert(0, '№')
+    else:
+        fields = [
+            "№",
+            "Название",
+            "Описание",
+            "Навыки",
+            "Опыт работы",
+            "Премиум-вакансия",
+            "Компания",
+            "Оклад",
+            "Название региона",
+            "Дата публикации вакансии"
+        ]
 
     table = PrettyTable([
         "№",
@@ -102,10 +129,10 @@ def print_vacancies(data_vacancies, dic_naming, experience, currency, true_false
             if len(clear_dict[item]) > 100:
                 clear_dict[item] = clear_dict[item][:100] + '...'
             current.append(clear_dict[item])
-        # print(current)
+        print(current)
         table.add_row(current)
-
-    print(table)
+    print(start, end, fields)
+    print(table.get_string(start=start, end=end, fields=fields))
 
 
 dic_naming = {
@@ -146,10 +173,11 @@ true_false = {
 }
 
 file_name = input()
-
+start_end = input()
+fields = input()
 
 if file := csv_reader(file_name):
     rows, titles = file
 
     data_vacancies = csv_filer(rows, titles)
-    print_vacancies(data_vacancies, dic_naming, experience, currency, true_false)
+    print_vacancies(data_vacancies, dic_naming, experience, currency, true_false, start_end, fields)
